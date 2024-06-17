@@ -148,12 +148,10 @@
 				18D775C222AD944300AE281E /* SceneDelegate.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				0A8BE47C23ECC55F00C24F52 /* Functional Views */,
-				8F3063CC2C1FF8D7004BEAD4 /* View */,
-				8F3063C92C1FF677004BEAD4 /* Presenter */,
-				8F3063D52C204F14004BEAD4 /* Router */,
-				8F3063C62C1FF57B004BEAD4 /* Interactor */,
 				0A8BE47D23ECC56F00C24F52 /* Entities */,
 				0AEABEDA23EF7E1B00FD3972 /* Data Sources */,
+				8F3063DF2C2076C2004BEAD4 /* TripListModule */,
+				8F3063E02C207722004BEAD4 /* TripDetailModule */,
 				0A20EFA9240EA73A00A0CA27 /* WaypointModule */,
 				18D775C622AD944400AE281E /* Assets.xcassets */,
 				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
@@ -172,42 +170,28 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8F3063C62C1FF57B004BEAD4 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				8F3063C72C1FF5B5004BEAD4 /* TripListInteractor.swift */,
-				8F3063D12C2047F9004BEAD4 /* TripDetailInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		8F3063C92C1FF677004BEAD4 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				8F3063CA2C1FF687004BEAD4 /* TripListPresenter.swift */,
-				8F3063CF2C2047E6004BEAD4 /* TripDetailPresenter.swift */,
-				8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		8F3063CC2C1FF8D7004BEAD4 /* View */ = {
+		8F3063DF2C2076C2004BEAD4 /* TripListModule */ = {
 			isa = PBXGroup;
 			children = (
 				8F3063CD2C1FF8FC004BEAD4 /* TripListView.swift */,
-				8F3063D32C204805004BEAD4 /* TripDetailView.swift */,
-				8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */,
+				8F3063CA2C1FF687004BEAD4 /* TripListPresenter.swift */,
+				8F3063D62C20501E004BEAD4 /* TripListRouter.swift */,
+				8F3063C72C1FF5B5004BEAD4 /* TripListInteractor.swift */,
 			);
-			path = View;
+			path = TripListModule;
 			sourceTree = "<group>";
 		};
-		8F3063D52C204F14004BEAD4 /* Router */ = {
+		8F3063E02C207722004BEAD4 /* TripDetailModule */ = {
 			isa = PBXGroup;
 			children = (
-				8F3063D62C20501E004BEAD4 /* TripListRouter.swift */,
+				8F3063D32C204805004BEAD4 /* TripDetailView.swift */,
+				8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */,
+				8F3063CF2C2047E6004BEAD4 /* TripDetailPresenter.swift */,
+				8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */,
 				8F3063DC2C2074C2004BEAD4 /* TripDetailRouter.swift */,
+				8F3063D12C2047F9004BEAD4 /* TripDetailInteractor.swift */,
 			);
-			path = Router;
+			path = TripDetailModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

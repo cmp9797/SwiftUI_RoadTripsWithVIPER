@@ -26,50 +26,22 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-struct TripDetailView: View {
-    @ObservedObject var presenter: TripDetailPresenter
+class TripDetailRouter {
+    private let mapProvider: MapDataProvider
     
-    var body: some View {
-        VStack {
-            TextField("Trip Name", text: presenter.setTripName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding([.horizontal])
-            presenter.makeMapView()
-            Text(presenter.distanceLabel)
-            HStack {
-                Spacer()
-                EditButton()
-                Button(action: presenter.addWaypoint) {
-                    Text("Add")
-                }
-            }.padding([.horizontal])
-            List {
-                ForEach(presenter.waypoints, content: presenter.cell)
-                    .onMove(perform: presenter.didMoveWaypoint(fromOffsets:toOffset:))
-                    .onDelete(perform: presenter.didDeleteWaypoint(_:))
-            }
-
-        }
-        .navigationBarTitle(Text(presenter.tripName), displayMode: .inline)
-        .navigationBarItems(trailing: Button("Save", action: presenter.save))
-        
+    init(mapProvider: MapDataProvider) {
+        self.mapProvider = mapProvider
     }
-}
-
-#Preview {
-    let model = DataModel.sample
-    let trip = model.trips[1]
-    let mapProvider = RealMapDataProvider()
     
-    let iterator = TripDetailInteractor(
-        trip: trip,
-        model: model,
-        mapInfoProvider: mapProvider)
-    let presenter = TripDetailPresenter(interactor: iterator)
-    
-    return NavigationView {
-        TripDetailView(presenter: presenter)
+    func makeWaypointView(for waypoint: Waypoint) -> some View {
+        let presenter = WaypointViewPresenter(
+            waypoint: waypoint,
+            interactor: WaypointViewInteractor(
+                waypoint: waypoint,
+                mapInfoProvider: mapProvider))
+        return WaypointView(presenter: presenter)
     }
 }

@@ -35,6 +35,7 @@
 		8F3063D72C20501E004BEAD4 /* TripListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D62C20501E004BEAD4 /* TripListRouter.swift */; };
 		8F3063D92C20721B004BEAD4 /* TripMapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */; };
 		8F3063DB2C2072DD004BEAD4 /* TripMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */; };
+		8F3063DD2C2074C2004BEAD4 /* TripDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063DC2C2074C2004BEAD4 /* TripDetailRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		8F3063D62C20501E004BEAD4 /* TripListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListRouter.swift; sourceTree = "<group>"; };
 		8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMapViewPresenter.swift; sourceTree = "<group>"; };
 		8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMapView.swift; sourceTree = "<group>"; };
+		8F3063DC2C2074C2004BEAD4 /* TripDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				8F3063D62C20501E004BEAD4 /* TripListRouter.swift */,
+				8F3063DC2C2074C2004BEAD4 /* TripDetailRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				0A20EFAF240EA73A00A0CA27 /* WaypointViewInteractor.swift in Sources */,
 				0A20EFAD240EA73A00A0CA27 /* WaypointViewPresenter.swift in Sources */,
 				18D775C122AD944300AE281E /* AppDelegate.swift in Sources */,
+				8F3063DD2C2074C2004BEAD4 /* TripDetailRouter.swift in Sources */,
 				0A20EFAE240EA73A00A0CA27 /* WaypointView.swift in Sources */,
 				0A83577623D697A300D83533 /* MapView.swift in Sources */,
 				8F3063D02C2047E6004BEAD4 /* TripDetailPresenter.swift in Sources */,

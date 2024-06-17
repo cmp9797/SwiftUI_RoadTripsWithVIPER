@@ -32,7 +32,8 @@ import SwiftUI
 
 class TripDetailPresenter: ObservableObject {
     private let interactor: TripDetailInteractor
-    
+    private let router: TripDetailRouter
+
     private var cancellables = Set<AnyCancellable>()
     
     @Published var tripName: String = "No name"
@@ -49,6 +50,8 @@ class TripDetailPresenter: ObservableObject {
             set: {interactor.setTripName($0)}
         )
         
+        self.router = TripDetailRouter(mapProvider: interactor.mapInfoProvider)
+
         /// subscribe to tripNamePublisher and get the trip name from it, then assign to curr presenter tripName properties
         /// store the subscription to cancellables to ensure it properly cleaned up when the presenter instance is deallocated
         interactor.tripNamePublisher
@@ -75,4 +78,22 @@ class TripDetailPresenter: ObservableObject {
     func makeMapView() -> some View {
         TripMapView(presenter: TripMapViewPresenter(interactor: interactor))
     }
+    
+    func addWaypoint() {
+        interactor.addWaypoint()
+    }
+    func didMoveWaypoint(fromOffsets: IndexSet, toOffset: Int) {
+        interactor.moveWaypoint(fromOffsets: fromOffsets, toOffset: toOffset)
+    }
+    func didDeleteWaypoint(_ atOffsets: IndexSet) {
+        interactor.deleteWaypoint(atOffsets: atOffsets)
+    }
+    func cell(for waypoint: Waypoint) -> some View {
+        let destination = router.makeWaypointView(for: waypoint)
+            .onDisappear(perform: interactor.updateWaypoints)
+        return NavigationLink(destination: destination) {
+            Text(waypoint.name)
+        }
+    }
+
 }

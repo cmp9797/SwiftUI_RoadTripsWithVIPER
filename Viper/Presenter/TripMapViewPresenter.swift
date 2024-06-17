@@ -26,37 +26,33 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
+import MapKit
+import Combine
 
-struct TripDetailView: View {
-    @ObservedObject var presenter: TripDetailPresenter
+class TripMapViewPresenter: ObservableObject {
+    @Published var pins: [MKAnnotation] = []
+    @Published var routes: [MKRoute] = []
     
-    var body: some View {
-        VStack {
-            TextField("Trip Name", text: presenter.setTripName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding([.horizontal])
-            presenter.makeMapView()
-            Text(presenter.distanceLabel)
-        }
-        .navigationBarTitle(Text(presenter.tripName), displayMode: .inline)
-        .navigationBarItems(trailing: Button("Save", action: presenter.save))
+    let interactor: TripDetailInteractor
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(interactor: TripDetailInteractor) {
+        self.interactor = interactor
         
-    }
-}
-
-#Preview {
-    let model = DataModel.sample
-    let trip = model.trips[1]
-    let mapProvider = RealMapDataProvider()
-    
-    let iterator = TripDetailInteractor(
-        trip: trip,
-        model: model,
-        mapInfoProvider: mapProvider)
-    let presenter = TripDetailPresenter(interactor: iterator)
-    
-    return NavigationView {
-        TripDetailView(presenter: presenter)
+        interactor.$waypoints
+            .map {
+                $0.map {
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = $0.location
+                    return annotation
+                }
+            }
+            .assign(to: \.pins, on: self)
+            .store(in: &cancellables)
+        
+        interactor.$directions
+            .assign(to: \.routes, on: self)
+            .store(in: &cancellables)
     }
 }

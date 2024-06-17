@@ -33,6 +33,8 @@
 		8F3063D22C2047F9004BEAD4 /* TripDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D12C2047F9004BEAD4 /* TripDetailInteractor.swift */; };
 		8F3063D42C204805004BEAD4 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D32C204805004BEAD4 /* TripDetailView.swift */; };
 		8F3063D72C20501E004BEAD4 /* TripListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D62C20501E004BEAD4 /* TripListRouter.swift */; };
+		8F3063D92C20721B004BEAD4 /* TripMapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */; };
+		8F3063DB2C2072DD004BEAD4 /* TripMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,8 @@
 		8F3063D12C2047F9004BEAD4 /* TripDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailInteractor.swift; sourceTree = "<group>"; };
 		8F3063D32C204805004BEAD4 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		8F3063D62C20501E004BEAD4 /* TripListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListRouter.swift; sourceTree = "<group>"; };
+		8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMapViewPresenter.swift; sourceTree = "<group>"; };
+		8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 			children = (
 				8F3063CA2C1FF687004BEAD4 /* TripListPresenter.swift */,
 				8F3063CF2C2047E6004BEAD4 /* TripDetailPresenter.swift */,
+				8F3063D82C20721B004BEAD4 /* TripMapViewPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 			children = (
 				8F3063CD2C1FF8FC004BEAD4 /* TripListView.swift */,
 				8F3063D32C204805004BEAD4 /* TripDetailView.swift */,
+				8F3063DA2C2072DD004BEAD4 /* TripMapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -274,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F3063D92C20721B004BEAD4 /* TripMapViewPresenter.swift in Sources */,
 				0A78DB8E23E799E400934DD4 /* SplitImage.swift in Sources */,
 				0A624E0123E7A44D00212508 /* ImageDataProvider.swift in Sources */,
 				8F3063D22C2047F9004BEAD4 /* TripDetailInteractor.swift in Sources */,
@@ -293,6 +300,7 @@
 				0A46782923D7AE980073803D /* Waypoint.swift in Sources */,
 				18D775C322AD944300AE281E /* SceneDelegate.swift in Sources */,
 				0A83577C23D6996200D83533 /* Trip.swift in Sources */,
+				8F3063DB2C2072DD004BEAD4 /* TripMapView.swift in Sources */,
 				8F3063CE2C1FF8FC004BEAD4 /* TripListView.swift in Sources */,
 				0A80218C23DF478B00166C86 /* MapDataProvider.swift in Sources */,
 				18D775C522AD944300AE281E /* ContentView.swift in Sources */,

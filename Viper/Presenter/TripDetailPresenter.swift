@@ -28,14 +28,51 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class TripDetailPresenter: ObservableObject {
     private let interactor: TripDetailInteractor
     
     private var cancellables = Set<AnyCancellable>()
     
+    @Published var tripName: String = "No name"
+    @Published var distanceLabel: String = "Calculating..."
+    @Published var waypoints: [Waypoint] = []
+
+    let setTripName: Binding<String>
+    
     init(interactor: TripDetailInteractor){
         self.interactor = interactor
+        
+        setTripName = Binding<String>(
+            get:{interactor.tripName},
+            set: {interactor.setTripName($0)}
+        )
+        
+        /// subscribe to tripNamePublisher and get the trip name from it, then assign to curr presenter tripName properties
+        /// store the subscription to cancellables to ensure it properly cleaned up when the presenter instance is deallocated
+        interactor.tripNamePublisher
+            .assign(to: \.tripName, on: self)
+            /// store the
+            .store(in: &cancellables)
+        
+        interactor.$totalDistance
+            .map { "Total Distance: " + MeasurementFormatter().string(from: $0) }
+            .replaceNil(with: "Calculating...")
+            .assign(to: \.distanceLabel, on: self)
+            .store(in: &cancellables)
+        
+        interactor.$waypoints
+            .assign(to: \.waypoints, on: self)
+            .store(in: &cancellables)
+
     }
     
+    func save() {
+        interactor.save()
+    }
+    
+    func makeMapView() -> some View {
+        TripMapView(presenter: TripMapViewPresenter(interactor: interactor))
+    }
 }

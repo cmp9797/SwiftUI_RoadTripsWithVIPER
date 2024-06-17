@@ -1,15 +1,15 @@
-/// Copyright (c) 2020 Razeware LLC
-///
+/// Copyright (c) 2024 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,26 +26,36 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import Foundation
+import Combine
 import SwiftUI
 
-struct ContentView: View {
-  @EnvironmentObject var model: DataModel
-
-  var body: some View {
-    NavigationView {
-        TripListView(presenter:
-            TripListPresenter(interactor:
-                TripListInteractor(model: model)))
+class TripListPresenter: ObservableObject {
+  @Published var trips: [Trip] = []
+  
+  /// store Combine subscriptions, so their lifetime is tied to the class.
+  /// any subscriptions will stay active as long as the presenter is around
+  private var cancellables = Set<AnyCancellable>()
+  
+  private let interactor: TripListInteractor
+  
+  init(interactor: TripListInteractor) {
+    self.interactor = interactor
+    
+    interactor.model.$trips
+      .assign(to: \.trips, on: self)
+      .store(in: &cancellables)
+  }
+  
+    func makeAddNewButton() -> some View {
+        Button(action: addNewTrip) {
+            Image(systemName: "plus")
+        }
     }
-  }
+               
+    func addNewTrip() {
+        interactor.addNewTrip()
+    }
+  
 }
 
-#if DEBUG
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    let model = DataModel.sample
-    return ContentView()
-      .environmentObject(model)
-  }
-}
-#endif

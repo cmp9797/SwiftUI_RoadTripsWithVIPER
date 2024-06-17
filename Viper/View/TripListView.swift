@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2024 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -28,24 +28,27 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  @EnvironmentObject var model: DataModel
 
-  var body: some View {
-    NavigationView {
-        TripListView(presenter:
-            TripListPresenter(interactor:
-                TripListInteractor(model: model)))
+struct TripListView: View {
+    @ObservedObject var presenter: TripListPresenter
+    var body: some View {
+        List {
+            ForEach (presenter.trips, id: \.id) { item in
+                TripListCell(trip: item)
+                    .frame(height: 240)
+            }
+        }
+        .listStyle(.plain)
+        .navigationBarTitle("RoadTrips", displayMode: .inline)
+        .navigationBarItems(trailing: presenter.makeAddNewButton())
     }
-  }
 }
 
-#if DEBUG
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    let model = DataModel.sample
-    return ContentView()
-      .environmentObject(model)
-  }
+#Preview {
+    let model =  DataModel.sample
+    let interactor = TripListInteractor(model: model)
+    let presenter = TripListPresenter(interactor: interactor)
+    return NavigationView {
+        TripListView(presenter: presenter)
+    }
 }
-#endif
